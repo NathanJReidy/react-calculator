@@ -2,29 +2,25 @@ import React, { useState, useEffect } from "react";
 import "./index.css";
 
 export default function Calculator() {
-  const [firstNum, setFirstNum] = useState(0);
-  const [secondNum, setSecondNum] = useState(0);
-  const [result, setResult] = useState(0);
-
+  const [firstNum, setFirstNum] = useState("");
+  const [secondNum, setSecondNum] = useState("");
   const [plus, setPlus] = useState(false);
   const [minus, setMinus] = useState(false);
   const [multiply, setMultiply] = useState(false);
   const [divide, setDivide] = useState(false);
-
   const [label, setLabel] = useState("+");
-
   const [count, setCount] = useState(0);
+  const [result, setResult] = useState(null);
 
   const resetAll = () => {
     setPlus(false);
     setMinus(false);
-    setResult(0);
+    setResult(null);
     setMultiply(false);
     setDivide(false);
     setLabel("+");
-    setFirstNum(0);
-    setSecondNum(0);
-    setCount(0);
+    setFirstNum("");
+    setSecondNum("");
   };
 
   const handlePlus = () => {
@@ -32,7 +28,8 @@ export default function Calculator() {
     setMinus(false);
     setMultiply(false);
     setDivide(false);
-    calculateResult();
+
+    setResult(parseInt(firstNum) + parseInt(secondNum));
   };
 
   const handleMinus = () => {
@@ -40,7 +37,8 @@ export default function Calculator() {
     setMinus(true);
     setMultiply(false);
     setDivide(false);
-    calculateResult();
+
+    setResult(parseInt(firstNum) - parseInt(secondNum));
   };
 
   const handleMultiply = () => {
@@ -48,7 +46,7 @@ export default function Calculator() {
     setMinus(false);
     setMultiply(true);
     setDivide(false);
-    calculateResult();
+    setResult(parseInt(firstNum) * parseInt(secondNum));
   };
 
   const handleDivide = () => {
@@ -56,21 +54,7 @@ export default function Calculator() {
     setMinus(false);
     setMultiply(false);
     setDivide(true);
-    calculateResult();
-  };
-
-  const calculateResult = () => {
-    if (firstNum !== 0 && secondNum !== 0) {
-      if (plus === true) {
-        setResult(parseInt(firstNum) + parseInt(secondNum));
-      } else if (minus === true) {
-        setResult(parseInt(firstNum) - parseInt(secondNum));
-      } else if (multiply === true) {
-        setResult(parseInt(firstNum) * parseInt(secondNum));
-      } else if (divide === true) {
-        setResult(parseInt(firstNum) / parseInt(setSecondNum));
-      }
-    }
+    setResult(parseInt(firstNum) / parseInt(secondNum));
   };
 
   return (
@@ -119,6 +103,9 @@ export default function Calculator() {
               onClick={() => {
                 handlePlus();
                 setCount(count + 1);
+                console.log(
+                  `firstNum is ${firstNum} and secondNum is ${secondNum}`
+                );
               }}
             >
               +
@@ -130,6 +117,9 @@ export default function Calculator() {
               onClick={() => {
                 handleMinus();
                 setCount(count + 1);
+                console.log(
+                  `firstNum is ${firstNum} and secondNum is ${secondNum}`
+                );
               }}
             >
               -
@@ -141,6 +131,9 @@ export default function Calculator() {
               onClick={() => {
                 handleMultiply();
                 setCount(count + 1);
+                console.log(
+                  `firstNum is ${firstNum} and secondNum is ${secondNum}`
+                );
               }}
             >
               *
@@ -152,6 +145,9 @@ export default function Calculator() {
               onClick={() => {
                 handleDivide();
                 setCount(count + 1);
+                console.log(
+                  `firstNum is ${firstNum} and secondNum is ${secondNum}`
+                );
               }}
             >
               /
@@ -168,12 +164,14 @@ export default function Calculator() {
               Reset
             </button>
             <div className="layout-row justify-content-center align-items-center result-container">
-              <div
-                data-testid="result"
-                className="result-value ma-0 slide-up-fade-in"
-              >
-                Result: {result}
-              </div>
+              {result != null ? (
+                <div
+                  data-testid="result"
+                  className="result-value ma-0 slide-up-fade-in"
+                >
+                  Result: {result}
+                </div>
+              ) : null}
             </div>
           </div>
         </section>

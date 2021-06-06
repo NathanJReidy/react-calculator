@@ -25,6 +25,34 @@ export default function Calculator() {
     }
   };
 
+  const handlePlus = () => {
+    setPlus(true);
+    setMinus(false);
+    setMultiply(false);
+    setDivide(false);
+  };
+
+  const handleMinus = () => {
+    setPlus(false);
+    setMinus(true);
+    setMultiply(false);
+    setDivide(false);
+  };
+
+  const handleMultiply = () => {
+    setPlus(false);
+    setMinus(false);
+    setMultiply(true);
+    setDivide(false);
+  };
+
+  const handleDivide = () => {
+    setPlus(false);
+    setMinus(false);
+    setMultiply(false);
+    setDivide(true);
+  };
+
   return (
     <div className="layout-column align-items-center">
       <div
@@ -64,6 +92,7 @@ export default function Calculator() {
               className="operationFont"
               type="submit"
               data-testid="addButton"
+              onClick={handlePlus}
             >
               +
             </button>
@@ -71,6 +100,7 @@ export default function Calculator() {
               className="operationFont"
               type="submit"
               data-testid="subtractButton"
+              onClick={handleMinus}
             >
               -
             </button>
@@ -78,6 +108,7 @@ export default function Calculator() {
               className="operationFont"
               type="submit"
               data-testid="multiplyButton"
+              onClick={handleMultiply}
             >
               *
             </button>
@@ -85,6 +116,7 @@ export default function Calculator() {
               className="operationFont"
               type="submit"
               data-testid="divideButton"
+              onClick={handleDivide}
             >
               /
             </button>

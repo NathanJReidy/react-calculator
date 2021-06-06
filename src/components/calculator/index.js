@@ -4,6 +4,7 @@ import "./index.css";
 export default function Calculator() {
   const [firstNum, setFirstNum] = useState(0);
   const [secondNum, setSecondNum] = useState(0);
+  const [result, setResult] = useState(0);
 
   const [plus, setPlus] = useState(false);
   const [minus, setMinus] = useState(false);
@@ -26,6 +27,8 @@ export default function Calculator() {
               autoComplete="off"
               placeholder="Eg: 1"
               name="input1"
+              value={firstNum}
+              onChange={(e) => setFirstNum(e.target.value)}
             />
             <label
               className="ml-2 mr-2 symbol text-center"
@@ -37,6 +40,8 @@ export default function Calculator() {
               autoComplete="off"
               className="ml-3 mr-3"
               placeholder="Eg: 2"
+              value={secondNum}
+              onChange={(e) => setSecondNum(e.target.value)}
             />
           </div>
 
@@ -83,7 +88,9 @@ export default function Calculator() {
               <div
                 data-testid="result"
                 className="result-value ma-0 slide-up-fade-in"
-              ></div>
+              >
+                Result: {result}
+              </div>
             </div>
           </div>
         </section>

@@ -11,16 +11,32 @@ export default function Calculator() {
   const [multiply, setMultiply] = useState(false);
   const [divide, setDivide] = useState(false);
 
+  const [label, setLabel] = useState("+");
+
+  const [count, setCount] = useState(0);
+
+  const resetAll = () => {
+    setPlus(false);
+    setMinus(false);
+    setResult(0);
+    setMultiply(false);
+    setDivide(false);
+    setLabel("+");
+    setFirstNum(0);
+    setSecondNum(0);
+    setCount(0);
+  };
+
   const calculateResult = () => {
     if (firstNum !== 0 && secondNum !== 0) {
       if (plus === true) {
-        setResult(firstNum + secondNum);
+        setResult(parseInt(firstNum) + parseInt(secondNum));
       } else if (minus === true) {
-        setResult(firstNum - secondNum);
+        setResult(parseInt(firstNum) - parseInt(secondNum));
       } else if (multiply === true) {
-        setResult(firstNum * secondNum);
+        setResult(parseInt(firstNum) * parseInt(secondNum));
       } else if (divide === true) {
-        setResult(firstNum / setSecondNum);
+        setResult(parseInt(firstNum) / parseInt(setSecondNum));
       }
     }
   };
@@ -30,6 +46,7 @@ export default function Calculator() {
     setMinus(false);
     setMultiply(false);
     setDivide(false);
+    calculateResult();
   };
 
   const handleMinus = () => {
@@ -37,6 +54,7 @@ export default function Calculator() {
     setMinus(true);
     setMultiply(false);
     setDivide(false);
+    calculateResult();
   };
 
   const handleMultiply = () => {
@@ -44,6 +62,7 @@ export default function Calculator() {
     setMinus(false);
     setMultiply(true);
     setDivide(false);
+    calculateResult();
   };
 
   const handleDivide = () => {
@@ -51,14 +70,14 @@ export default function Calculator() {
     setMinus(false);
     setMultiply(false);
     setDivide(true);
+    calculateResult();
   };
 
   return (
     <div className="layout-column align-items-center">
-      <div
-        data-testid="total-operations"
-        className="pt-50 total-operations"
-      ></div>
+      <div data-testid="total-operations" className="pt-50 total-operations">
+        Total operations performed: {count}
+      </div>
       <div className="card">
         <section className="card-text">
           <div className="layout-row justify-content-around align-items-center mt-40">
@@ -75,7 +94,12 @@ export default function Calculator() {
             <label
               className="ml-2 mr-2 symbol text-center"
               data-testid="selected-operator"
-            ></label>
+              value={
+                plus ? "+" : minus ? "-" : multiply ? "*" : divide ? "/" : "+"
+              }
+            >
+              {plus ? "+" : minus ? "-" : multiply ? "*" : divide ? "/" : "+"}
+            </label>
             <input
               type="number"
               data-testid="app-input2"
@@ -92,7 +116,10 @@ export default function Calculator() {
               className="operationFont"
               type="submit"
               data-testid="addButton"
-              onClick={handlePlus}
+              onClick={() => {
+                handlePlus();
+                setCount(count + 1);
+              }}
             >
               +
             </button>
@@ -100,7 +127,10 @@ export default function Calculator() {
               className="operationFont"
               type="submit"
               data-testid="subtractButton"
-              onClick={handleMinus}
+              onClick={() => {
+                handleMinus();
+                setCount(count + 1);
+              }}
             >
               -
             </button>
@@ -108,7 +138,10 @@ export default function Calculator() {
               className="operationFont"
               type="submit"
               data-testid="multiplyButton"
-              onClick={handleMultiply}
+              onClick={() => {
+                handleMultiply();
+                setCount(count + 1);
+              }}
             >
               *
             </button>
@@ -116,7 +149,10 @@ export default function Calculator() {
               className="operationFont"
               type="submit"
               data-testid="divideButton"
-              onClick={handleDivide}
+              onClick={() => {
+                handleDivide();
+                setCount(count + 1);
+              }}
             >
               /
             </button>
@@ -127,6 +163,7 @@ export default function Calculator() {
               type="reset"
               data-testid="resetButton"
               className="outline danger"
+              onClick={resetAll}
             >
               Reset
             </button>

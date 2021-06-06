@@ -27,20 +27,6 @@ export default function Calculator() {
     setCount(0);
   };
 
-  const calculateResult = () => {
-    if (firstNum !== 0 && secondNum !== 0) {
-      if (plus === true) {
-        setResult(parseInt(firstNum) + parseInt(secondNum));
-      } else if (minus === true) {
-        setResult(parseInt(firstNum) - parseInt(secondNum));
-      } else if (multiply === true) {
-        setResult(parseInt(firstNum) * parseInt(secondNum));
-      } else if (divide === true) {
-        setResult(parseInt(firstNum) / parseInt(setSecondNum));
-      }
-    }
-  };
-
   const handlePlus = () => {
     setPlus(true);
     setMinus(false);
@@ -71,6 +57,20 @@ export default function Calculator() {
     setMultiply(false);
     setDivide(true);
     calculateResult();
+  };
+
+  const calculateResult = () => {
+    if (firstNum !== 0 && secondNum !== 0) {
+      if (plus === true) {
+        setResult(parseInt(firstNum) + parseInt(secondNum));
+      } else if (minus === true) {
+        setResult(parseInt(firstNum) - parseInt(secondNum));
+      } else if (multiply === true) {
+        setResult(parseInt(firstNum) * parseInt(secondNum));
+      } else if (divide === true) {
+        setResult(parseInt(firstNum) / parseInt(setSecondNum));
+      }
+    }
   };
 
   return (

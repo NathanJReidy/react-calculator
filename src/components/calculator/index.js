@@ -11,6 +11,20 @@ export default function Calculator() {
   const [multiply, setMultiply] = useState(false);
   const [divide, setDivide] = useState(false);
 
+  const calculateResult = () => {
+    if (firstNum !== 0 && secondNum !== 0) {
+      if (plus === true) {
+        setResult(firstNum + secondNum);
+      } else if (minus === true) {
+        setResult(firstNum - secondNum);
+      } else if (multiply === true) {
+        setResult(firstNum * secondNum);
+      } else if (divide === true) {
+        setResult(firstNum / setSecondNum);
+      }
+    }
+  };
+
   return (
     <div className="layout-column align-items-center">
       <div
